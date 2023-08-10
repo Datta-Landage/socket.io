@@ -8,7 +8,7 @@ const cors = require("cors");
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://3.110.120.134:3000",
     methods: ["GET", "POST"],
   },
 });
