@@ -1,4 +1,3 @@
-const { log } = require("console");
 const express = require("express");
 const app = express();
 const http = require("http");
@@ -6,8 +5,10 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
+const cors = require("cors");
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cors());
 
 app.post("/", (req, res) => {
   const { businessId, payload } = req.body;
@@ -19,6 +20,6 @@ io.on("connection", (socket) => {
   console.log("new user connected");
 });
 
-server.listen(3000, '0.0.0.0', () => {
-  console.log("listinights connected 3000", );
+server.listen(3000, "0.0.0.0", () => {
+  console.log("listinights connected 3000");
 });
