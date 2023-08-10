@@ -3,9 +3,15 @@ const app = express();
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server);
 
 const cors = require("cors");
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
