@@ -8,7 +8,7 @@ const cors = require("cors");
 
 const io = new Server(server, {
   cors: {
-    origin: "https://socketfrontend.vercel.app/",
+    origin: "http://localhost:3000",
     methods: ["GET", "POST"],
   },
 });
