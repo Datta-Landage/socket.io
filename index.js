@@ -8,7 +8,7 @@ const cors = require("cors");
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://socketfrontend.vercel.app/",
     methods: ["GET", "POST"],
   },
 });
@@ -16,22 +16,14 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 
+app.post("/", (req, res) => {
+  const { businessId, payload } = req.body;
+  io.emit(businessId, JSON.stringify(payload));
+  res.status(200).send({ statusbar: "success" });
+});
+
 io.on("connection", (socket) => {
-  console.log(`new user connected ${socket.id}`);
-
-  // listen for the 'cart' event
-  socket.on("businessId", async (data) => {
-    try {
-      // Emit the updated cart data to all connected clients
-      io.emit("businessId", data);
-    } catch (error) {
-      console.error(`Error in cart event: ${error}`);
-    }
-  });
-
-  socket.on("disconnect", () => {
-    console.log("disconnected");
-  });
+  console.log("new user connected");
 });
 
 server.listen(3000, "0.0.0.0", () => {
