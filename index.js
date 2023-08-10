@@ -19,6 +19,6 @@ io.on("connection", (socket) => {
   console.log("new user connected");
 });
 
-server.listen(3000, () => {
-  console.log("listinights connected", 3000);
+server.listen(3000, '0.0.0.0', () => {
+  console.log("listinights connected 3000", );
 });
